@@ -44,10 +44,10 @@ _**Source**_
 
 | File Type   | Expected Columns                                |
 | ----------- | ----------------------------------------------- |
-| Operational | Batch_ID, Feed_kg, Output_kg, Feed_Type         |
-| MES         | Machine_ID, Batch_ID, Run_Time, Output_kg, Temp |
-| Accounting  | Batch_ID, Cost_VND, Date                        |
-| Logistics   | Batch_ID, Truck_ID, Delivery_Status, Date       |
+| Operational | batch_id, date, shift, egg_weight_g, larvae_age_day, larvae_weight_kg, feed_intake_kg, mortality_rate, drying_temp_avg, drying_duration_min, moisture_after_dry, output_kg, defect_kg, operator         |
+| MES         | batch_id, sensor_id, avg_temp, humidity, drying_time_min, chamber_id, vibration_alert |
+| Accounting  | batch_id, feed_cost, electricity_cost, maintenance_cost, labor_cost, packaging_cost, total_cost, cost_date                        |
+| Logistics   | batch_id, truck_id, shipment_date, destination, delivery_status, weight_kg, delay_hour, driver_name       |
 
 **3. Data Cleaning (for each validated file):**
 - Standardize column formats (string / float / datetime).
@@ -56,7 +56,7 @@ _**Source**_
 - Save as [FileName]_cleaned.csv → folder /Clean_Data/.
 
 **4. Append Clean Data**
-- Append each cleaned file to its corresponding master file under /Master_Data/:
+- Append each cleaned file to its corresponding master file under folder /Master_Data/:
 
 | Cleaned File                 | Target Master File     |
 | ---------------------------- | ---------------------- |
@@ -68,10 +68,10 @@ _**Source**_
 → Log append results into Validation_Log.csv (including timestamp and status).
 
 **5. Merge Master Files**
-- After all four master files are updated: Merge them by Batch_ID and update Master_Data_All.csv.
+- After all four master files are updated: Merge them by Batch_ID and update it to Master_Data_All.csv file.
 
 **6. Weekly Summary & Escalation**
-- Export summary report ( Passed / Failed / Skipped files ).
+- Export Validation_Log.csv ( Passed / Failed / Skipped files ).
 - Count successful uploads per department.
 - If any file fails > 2 times → trigger escalation (CC Bruno, Sacha, Factory Director).
 
@@ -83,7 +83,6 @@ _**Source**_
 | *_cleaned.csv         | Cleaned, validated weekly files           |
 | Master_*.csv          | Master datasets by domain                 |
 | Master_Data_All.csv   | Merged dataset for analytics              |
-| Integrity_Summary.txt | (Option) Weekly summary for review        |
 
 **Actionable Plans**
 - Use Master_Data_All.csv to detect missing batches, yield deviation, and cost variance across departments.
