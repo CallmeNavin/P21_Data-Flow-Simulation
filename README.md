@@ -1,101 +1,87 @@
 # P21_Data-Flow-Simulation
 
-**VERSION 1 - DATA INTEGRITY SYSTEM DESIGN & DATA CONSISTENCY, ROOT CAUSE SIMULATION**
+**VERSION 1 - DATA INTEGRITY SYSTEM DESIGN & SYSTEM SIMULATION**
 
 **A. Project Overview**
 
-- Design a weekly data validation & consolidation system to ensure data consistency and reliability across all operational domains (Operational, MES, Accounting and Logistics) before loading into analysis or Power BI dashboards.
+- A data integrity and validation pipeline designed to ensure weekly operational consistency across all domains (Operational, MES, Accounting and Logistics) before data is consolidated for analytics and Power BI dashboards.
+- This version focuses on data validation, cleaning, schema alignment, and master data merging.
 
 **B. Dataset Information**
 
 _**Source**_
 
-- Realistics Simulated
+| Field      | Description                                                          |
+| ---------- | -------------------------------------------------------------------- |
+| Source     | Realistic simulated data generated for operational process testing   |
+| Frequency  | Weekly uploads                                                       |
+| File Types | Operational, MES, Accounting, Logistics                              |
+| Format     | CSV (`<FileType>_YYYYW##.csv`, e.g., `Operational_Data_2025W41.csv`) |
+
 
 **C. Methodology**
 
-- Pseudo Coding
+- Framework used: Python
+- Approach: Modular pseudo-coding, replicating a real-world ETL pipeline structure.
 
 **D. System Logic Overview & Actionable Plans**
 
 **System Logic Overview**
 
-**1. File Detection & Initialization:**
-- Monitor folder /Weekly_Uploaded/ for new weekly .csv files.
-(Naming pattern: <FileType>_YYYYW##.csv, e.g., MES_Data_2025W41.csv)
-- Identify all 4 expected file types: Operational_Data, MES_Data, Accounting_Data, Logistics_Data. 
+_**1. File Detection & Initialization**_
 
-→ If fewer than 4 detected → flag “Incomplete Week Upload” in Validation_Log.csv and stop process.
-- Check for Validation_Log.csv and all Master_*.csv files. 
+- Monitor folder /Weekly_Uploaded/ for new .csv files.
+- Validate presence of all 4 required domains (Operational_Data, MES_Data, Accounting_Data, Logistics_Data).
+- Auto-create log file Validation_Log.csv if missing.
+- Naming pattern enforced: <FileType>_YYYYW##.csv → e.g. MES_Data_2025W41.csv.
+- If fewer than 4 files detected → stop pipeline & log “Incomplete Upload” status.
 
-→ If missing: auto-create with headers: Validation_Log.csv = [ File_Name, File_Type, Upload_Date, Upload_By, Status, Error_Message ]
+_**2. File Validation**_
 
-**2. File Validation (for each new file):**
-- Detect file type: (Operational / MES / Accounting / Logistics).
+- Each file passes through schema and format validation:
+  + Check file type: ensure .csv format, rename automatically if needed.
+  + Check schema: compare columns against expected templates.
+  + Log errors to Validation_Log.csv if missing columns or mismatched schema.
 
-→ If not .csv: convert to .csv. Log errors & warnings to Validation_Log.csv.
-- Validate file name format: Must follow template <Type>_YYYYW##.csv.
+| File Type   | Expected Columns                                                                                                                                                                                |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operational | batch_id, date, shift, egg_weight_g, larvae_age_day, larvae_weight_kg, feed_intake_kg, mortality_rate, drying_temp_avg, drying_duration_min, moisture_after_dry, output_kg, defect_kg, operator |
+| MES         | batch_id, sensor_id, avg_temp, humidity, drying_time_min, chamber_id, vibration_alert                                                                                                           |
+| Accounting  | batch_id, feed_cost, electricity_cost, maintenance_cost, labor_cost, packaging_cost, total_cost, cost_date                                                                                      |
+| Logistics   | batch_id, truck_id, shipment_date, destination, delivery_status, weight_kg, delay_hour, driver_name                                                                                             |
 
-→ If mismatch: auto-rename + log errors & warnings to Validation_Log.csv.
-- Validate schema: Compare actual columns vs expected template.
+_**3. Data Cleaning**_
 
-→ If mismatch: log to Validation_Log.csv and skip file.
-- File Type	Expected Columns
-
-| File Type   | Expected Columns                                |
-| ----------- | ----------------------------------------------- |
-| Operational | batch_id, date, shift, egg_weight_g, larvae_age_day, larvae_weight_kg, feed_intake_kg, mortality_rate, drying_temp_avg, drying_duration_min, moisture_after_dry, output_kg, defect_kg, operator         |
-| MES         | batch_id, sensor_id, avg_temp, humidity, drying_time_min, chamber_id, vibration_alert |
-| Accounting  | batch_id, feed_cost, electricity_cost, maintenance_cost, labor_cost, packaging_cost, total_cost, cost_date                        |
-| Logistics   | batch_id, truck_id, shipment_date, destination, delivery_status, weight_kg, delay_hour, driver_name       |
-
-**3. Data Cleaning (for each validated file):**
-- Standardize column formats (string / float / datetime).
+- Normalize column names → lowercase & trim spaces.
 - Remove blank rows.
-- Detect and highlight outliers or abnormal patterns.
-- Save as [FileName]_cleaned.csv → folder /Clean_Data/.
+- Standardize data types (date, numeric, string).
+- Detect outliers using IQR method (Interquartile Range).
+- Export cleaned files → /Clean_Data/.
+- Output: [FileType]_cleaned.csv
 
-**4. Append Clean Data**
-- Append each cleaned file to its corresponding master file under folder /Master_Data/:
+_**4. Master Data Appending**_
 
-| Cleaned File                 | Target Master File     |
+- Each cleaned dataset is appended to its corresponding master dataset:
+
+| Cleaned File                 | Master Target          |
 | ---------------------------- | ---------------------- |
 | Operational_Data_cleaned.csv | Master_Operational.csv |
 | MES_Data_cleaned.csv         | Master_MES.csv         |
 | Accounting_Data_cleaned.csv  | Master_Accounting.csv  |
 | Logistics_Data_cleaned.csv   | Master_Logistics.csv   |
 
-→ Log append results into Validation_Log.csv (including timestamp and status).
+- Remove duplicates by batch_id (keep latest).
+- Log results: “Appended to Master”.
 
-**5. Merge Master Files**
-- After all four master files are updated: Merge them by Batch_ID and update it to Master_Data_All.csv file.
+_**5. Master Merging**_
 
-**6. Weekly Summary & Escalation**
-- Export Validation_Log.csv ( Passed / Failed / Skipped files ).
+- Merge all 4 master files on batch_id (LEFT JOIN) to create one consolidated dataset: Operational + MES + Accounting + Logistics → Master_Data_All.csv
+- Output: Master_Data_All.csv — base for analytical dashboards.
 
-**Expected Outputs**
+_**6. Weekly Validation Log & Escalation**_
 
-| File Name             | Description                               |
-| --------------------- | ----------------------------------------- |
-| Validation_Log.csv    | Record of all validation and error events |
-| *_cleaned.csv         | Cleaned, validated weekly files           |
-| Master_*.csv          | Master datasets by domain                 |
-| Master_Data_All.csv   | Merged dataset for analytics              |
-
-**Actionable Plans**
-- Use Master_Data_All.csv to detect missing batches, yield deviation, and cost variance across departments.
-- Prepare summary table for cross-team review.
-
-**E. Appendix**
-
-**Standard Structures:**
-
-![Structure](https://github.com/CallmeNavin/P21_Data-Flow-Simulation/blob/main/Version%201/Visualization/Structures.jpg)
-
-
-**E. Further Version**
-
-- Version 2:
+- All operations (validation, cleaning, merging) are logged into Validation_Log.csv with timestamp and status.
+- This ensures traceability for future audits or automation.
 
 **About Me**
 
