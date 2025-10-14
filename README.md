@@ -72,8 +72,6 @@ _**Source**_
 
 **6. Weekly Summary & Escalation**
 - Export Validation_Log.csv ( Passed / Failed / Skipped files ).
-- Count successful uploads per department.
-- If any file fails > 2 times → trigger escalation (CC Bruno, Sacha, Factory Director).
 
 **Expected Outputs**
 
