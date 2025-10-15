@@ -1,0 +1,19 @@
+File_Name,File_Type,Upload_Date,Upload_By,Status,Error_Message
+Accounting_Data_2025W41_cleaned.csv,Accounting_Data,2025-10-14 21:18:21,Navin,Cleaned,OK
+Master_Accounting.csv,Accounting_Data,2025-10-14 21:18:21,Navin,Appended to Master,
+Logistics_Data_2025W41_cleaned.csv,Logistics_Data,2025-10-14 21:18:21,Navin,Cleaned,OK
+Master_Logistics.csv,Logistics_Data,2025-10-14 21:18:21,Navin,Appended to Master,
+Operational_Data_2025W41_cleaned.csv,Operational_Data,2025-10-14 21:18:21,Navin,Cleaned,OK
+Master_Operational.csv,Operational_Data,2025-10-14 21:18:21,Navin,Appended to Master,
+MES_Data_2025W41_cleaned.csv,MES_Data,2025-10-14 21:18:21,Navin,Cleaned,OK
+Master_MES.csv,MES_Data,2025-10-14 21:18:21,Navin,Appended to Master,
+Master_Data_All.csv,Merged Dataset,2025-10-14 21:18:21,Navin,Merged,
+Accounting_Data_2025W41_cleaned.csv,Accounting_Data,2025-10-14 21:22:09,Navin,Cleaned,OK
+Master_Accounting.csv,Accounting_Data,2025-10-14 21:22:09,Navin,Appended to Master,
+Logistics_Data_2025W41_cleaned.csv,Logistics_Data,2025-10-14 21:22:09,Navin,Cleaned,OK
+Master_Logistics.csv,Logistics_Data,2025-10-14 21:22:09,Navin,Appended to Master,
+Operational_Data_2025W41_cleaned.csv,Operational_Data,2025-10-14 21:22:09,Navin,Cleaned,OK
+Master_Operational.csv,Operational_Data,2025-10-14 21:22:09,Navin,Appended to Master,
+MES_Data_2025W41_cleaned.csv,MES_Data,2025-10-14 21:22:09,Navin,Cleaned,OK
+Master_MES.csv,MES_Data,2025-10-14 21:22:09,Navin,Appended to Master,
+Master_Data_All.csv,Merged Dataset,2025-10-14 21:22:09,Navin,Merged,
