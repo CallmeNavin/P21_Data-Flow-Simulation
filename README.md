@@ -83,6 +83,25 @@ _**6. Weekly Validation Log & Escalation**_
 - All operations (validation, cleaning, merging) are logged into Validation_Log.csv with timestamp and status.
 - This ensures traceability for future audits or automation.
 
+**VERSION 2 - ROOT CAUSE SIMULATION**
+
+**A. Project Overview**
+
+- This project builds an automated Root Cause Simulation System that detects operational anomalies from weekly production data
+
+**B. Dataset Information**
+
+- Master_Data_All.csv – consolidated dataset from Version 1.
+
+**C. Direction**
+
+- Define acceptable range.
+- Apply rule-based conditions.
+- Generate reports:
+  + Root_Cause_Report.csv → detailed batch-level anomalies.
+  + Root_Cause_Summary.csv → summary of root-cause counts.
+- Log activity to Validation_Log.csv.
+
 **About Me**
 
 Hi, I'm Navin (Bao Vy) – an aspiring Data Analyst passionate about turning raw data into actionable business insights. I’m eager to contribute to data-driven decision making and help organizations translate analytics into business impact. For more details, please reach out at:
