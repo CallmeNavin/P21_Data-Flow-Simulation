@@ -1,0 +1,2 @@
+batch_id,yield_pct,mortality_rate,drying_temp_avg,drying_duration_min,moisture_after_dry,defect_kg,delivery_status,Root_Cause
+B003,0.7317073170731707,0.04,102,185,9.5,3,Delayed,Delivery delayed
