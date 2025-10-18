@@ -87,7 +87,7 @@ _**6. Weekly Validation Log & Escalation**_
 
 **A. Project Overview**
 
-- This project builds an automated Root Cause Simulation System that detects operational anomalies from weekly production data
+- This version builds an automated Root Cause Simulation System that detects operational anomalies from weekly production data
 
 **B. Dataset Information**
 
@@ -101,6 +101,46 @@ _**6. Weekly Validation Log & Escalation**_
   + Root_Cause_Report.csv → detailed batch-level anomalies.
   + Root_Cause_Summary.csv → summary of root-cause counts.
 - Log activity to Validation_Log.csv.
+
+**VERSION 3 - COST DRIVER ANALYSIS**
+
+**A. Project Overview**
+
+- This version aims to identify the most influential factors affecting the production cost per kilogram of protein.  
+
+![Heatmap](https://github.com/CallmeNavin/P21_Data-Flow-Simulation/blob/main/Version%203/Visualization/Correlation%20Heatmap.jpg)
+
+**B. Dataset Information**
+
+_**Source**_
+
+- Simulated Data (based on realistic factory conditions)
+- Key Variables Used: 'batch_id', 'feed_intake_kg', 'output_kg', 'feed_cost', 'electricity_cost', 'maintenance_cost', 'labor_cost', 'packaging_cost', 'total_cost', 'mortality_rate', 'drying_temp_avg', 'moisture_after_dry'
+
+**C. Key Findings and Actionable Plans**
+
+**_Key Findings_**
+
+Top 5 Cost Drivers
+
+| Variable | Correlation |
+|-----------|-------------|
+| cost_per_kg | 1.000000 |
+| yield_pct | -0.683849 |
+| drying_temp_avg | -0.291865 |
+| moisture_after_dry | 0.164550 |
+| mortality_rate | 0.159752 |
+
+- Process-related variables (yield, drying temperature, moisture, mortality) show the strongest correlation with cost per kg. While Cost-related variables (feed, labor, maintenance) have minimal direct impact in this simulated scenario.  
+
+→ This indicates that operational efficiency, not financial fluctuation, currently drives most of the cost variance.
+
+**_Actionable Plans_**
+
+The dataset reflects the current simulated period. It should be **monitored for at least one month** to confirm whether these relationships represent a **temporary interference or a stable trend** before taking real operational actions. The **Actionable Plans** below are illustrative, assuming this pattern remains consistent over time.
+- Optimize process parameters to improve yield and stability.
+- Adjust drying temperature within the optimal range to reduce re-drying and energy waste.  
+- Continue monitoring correlations monthly to confirm if this trend remains stable or shifts toward cost-based drivers.
 
 **About Me**
 
