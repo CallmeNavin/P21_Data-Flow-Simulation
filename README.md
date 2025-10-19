@@ -142,6 +142,16 @@ The dataset reflects the current simulated period. It should be **monitored for 
 - Adjust drying temperature within the optimal range to reduce re-drying and energy waste.  
 - Continue monitoring correlations monthly to confirm if this trend remains stable or shifts toward cost-based drivers.
 
+# VERSION 4: IDLE FOR VERSION 1
+
+**A. Project Overview**
+
+**B. Dataset Information**
+
+- Simulated Data
+
+**D. System Logic Overview & Actionable Plans**
+
 **About Me**
 
 Hi, I'm Navin (Bao Vy) – an aspiring Data Analyst passionate about turning raw data into actionable business insights. I’m eager to contribute to data-driven decision making and help organizations translate analytics into business impact. For more details, please reach out at:
