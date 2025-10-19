@@ -1,0 +1,13 @@
+File_Name,File_Type,Upload_Date,Upload_By,Status,Error_Message
+Operational_Data_2025W40.csv,Operational_Data,10/19/2025 18:12,NAVIN,Success,Columns OK
+Operational_Data_2025W41.csv,Operational_Data,10/19/2025 18:14,NAVIN,Success,Columns OK
+Operational_Data_2025W40.csv,Operational_Data,10/19/2025 18:18,NAV,Success,Columns OK
+Accounting_Data_2025W40_cleaned.csv,Accounting_Data,10/19/2025 18:18,NAV,Cleaned,Outliers Flag
+Master_Accounting.csv,Accounting_Data,10/19/2025 18:18,NAV,Append to Master, 
+Logistics_Data_2025W40_cleaned.csv,Logistics_Data,10/19/2025 18:18,NAV,Cleaned,Outliers Flag
+Master_Logistics.csv,Logistics_Data,10/19/2025 18:18,NAV,Append to Master, 
+MES_Data_2025W40_cleaned.csv,MES_Data,10/19/2025 18:18,NAV,Cleaned,Outliers Flag
+Master_MES.csv,MES_Data,10/19/2025 18:18,NAV,Append to Master, 
+Operational_Data_2025W40_cleaned.csv,Operational_Data,10/19/2025 18:18,NAV,Cleaned,Outliers Flag
+Master_Operational.csv,Operational_Data,10/19/2025 18:18,NAV,Append to Master, 
+Master_Data_All,Merge Master Data,10/19/2025 18:18,NAV,Merged, 
