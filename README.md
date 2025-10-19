@@ -146,11 +146,55 @@ The dataset reflects the current simulated period. It should be **monitored for 
 
 **A. Project Overview**
 
+- This project simulates a data validation and integration system used in an operational factory environment. It ensures weekly uploaded files are validated, cleaned, and consolidated automatically.
+
 **B. Dataset Information**
 
-- Simulated Data
+- Simulated Data (based on realistic factory conditions)
+- Tool: IDLE Python (local)
 
-**D. System Logic Overview & Actionable Plans**
+**C. System Logic Overview & Actionable Plans**
+
+1. VALIDATE FILENAME
+- Set working directory (os.chdir)
+- Create Validation Log to track errors
+- Detect uploaded files in Weekly_Uploaded folder
+- Auto-rename invalid filenames to correct format
+- Log actions (rename / missing / failed)
+
+2. VALIDATE COLUMNS IN EACH FILE
+- Load expected schema for all data types: Operational_Data / MES_Data / Accounting_Data / Logistics_Data
+- Read CSVs and compare actual vs expected columns
+- Log missing / extra columns to Validation_Log.csv
+
+3. DATA CLEANING
+- Create folder “Cleaned_Data”
+- Drop fully blank rows
+- Convert date columns to datetime (auto-coerce invalid)
+- Strip text columns (remove whitespace)
+- Detect numeric outliers using IQR method
+- Save cleaned files to Cleaned_Data folder
+- Log “Cleaned” status with outlier info
+
+4. APPEND TO MASTER DATA
+- Create folder “Master_Data”
+- Append cleaned data to respective Master_xxx.csv
+- Drop duplicated batch_id records
+- Log “Appended to Master” status
+
+5. MERGE ALL MASTER FILES → MASTER_DATA_ALL.CSV
+- Merge all 4 Master datasets by batch_id: Operational + MES + Accounting + Logistics
+- Remove duplicated batch_id
+- Export consolidated dataset as Master_Data_All.csv
+- Log “Merged Successfully” or “Merge Failed”
+
+END OF PIPELINE
+- Print completion message
+- Output:
+  + Validation_Log.csv
+  + Cleaned_Data folder
+  + Master_Data folder
+  + Master_Data_All.csv
 
 **About Me**
 
